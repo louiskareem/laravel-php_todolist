@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Record;
+use App\Task;
 
 class RecordController extends Controller
 {
@@ -20,6 +21,11 @@ class RecordController extends Controller
     	$record = new Record;
     	$record->name = $request->name;
     	$record->save();
+        $task = Task::createTask($record->id);
+        if ($task->description === null) {
+            $task->record_id = $record->id;
+            $task->save();
+        }
 
     	return redirect('lists');
     }

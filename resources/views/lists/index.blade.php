@@ -14,7 +14,10 @@
                                     <div class="col-sm-6">
                                         <div class="card">
                                             <div class="card-block">
-                                                <h3><a href="{{ action('TaskController@index', $record->task_id) }}">{{ $record->name }}</a></h3>
+                                                <h3>{{ $record->name }}</h3>
+                                                @foreach($record->tasks as $task)
+                                                    <a class="btn btn-info" href="{{ action('TaskController@index', $task->id) }}">View</a>
+                                                @endforeach
                                                 <a class="btn btn-info" href="{{ action('RecordController@edit', $record->id) }}">Edit</a>
                                                 <button data-toggle="modal" data-target="#deleteModal" class="btn btn-danger">Delete</button>
                                             </div>
