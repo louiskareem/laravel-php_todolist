@@ -24,6 +24,9 @@ class RecordController extends Controller
         $task = Task::createTask($record->id);
         if ($task->description === null) {
             $task->record_id = $record->id;
+            // $task->description = env('TASK_DESCRIPTION');
+            // $task->status = env('TASK_STATUS');
+            // $task->duration = env('TASK_DURATION');
             $task->save();
         }
 
@@ -52,5 +55,22 @@ class RecordController extends Controller
     	$record->delete();
 
     	return redirect('lists');
+    }
+
+    public function search(Request $request)
+    {
+        $data = $request->all();
+
+        dd($data);
+
+        // $profile = Employee::where('employee_id', request()->id)->first();
+        
+        // //optional, 
+        // if(is_null($profile)){
+        //     return Response::json('error');
+        // }else{
+        //     return Response::json('success');
+        // }
+
     }
 }

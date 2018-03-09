@@ -7,6 +7,9 @@
         <div class="col-md-8">
             <div class="card card-default">
                 <div class="card-header">Lists</div>
+<!--                     <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+ -->                    <br>
+
                     <form action="{{ action('RecordController@store') }}" method="POST" class="form-horizontal">
                         {{ csrf_field() }}
                             <div class="row">
@@ -16,8 +19,17 @@
                                             <div class="card-block">
                                                 <h3>{{ $record->name }}</h3>
                                                 @foreach($record->tasks as $task)
-                                                    <a class="btn btn-info" href="{{ action('TaskController@index', $task->id) }}">View</a>
+                                                    @if($task->description !== 'No_task')
+                                                        <a class="lead" href="{{ action('TaskController@index', $task->id) }}">{{ $task->description }}</a><br>
+                                                    @else
+                                                        <a style="display: none;" class="lead" href="{{ action('TaskController@index', $task->id) }}">{{ $task->description }}</a><br>
+                                                    @endif
                                                 @endforeach
+                                                @foreach($record->tasks as $task)
+                                                    @if($task->description === 'No_task')
+                                                        <a class="btn btn-default" href="{{ action('TaskController@index', $task->id) }}">Add Task</a>
+                                                    @endif
+                                                @endforeach                                               
                                                 <a class="btn btn-info" href="{{ action('RecordController@edit', $record->id) }}">Edit</a>
                                                 <button data-toggle="modal" data-target="#deleteModal" class="btn btn-danger">Delete</button>
                                             </div>
@@ -25,7 +37,9 @@
                                     </div>
                                 @endforeach
                             </div>
-                        <input class="form-control" type="text" name="name" placeholder="Type here..."><br>
+                            <br>
+                        <input class="form-control" type="text" name="name" placeholder="Type here to add a new list...">
+                        <br>
                         <button type="submit" class="btn btn-success">Add List</button>
                     </form>     
 
@@ -41,17 +55,15 @@
                             </div>
                         </div>
                     </div>
-
-<!--                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-                </div> -->
             </div>
         </div>
     </div>
 </div>
+@endsection
 
+@section('scripts')
+
+<script>
+
+</script>
 @endsection

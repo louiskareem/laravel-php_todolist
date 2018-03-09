@@ -8,7 +8,7 @@
             <div class="card card-default">
 
 @if (count($task) > 0)
-                <div class="card-header">{{ $task->record->name }}</div>
+                <h2 class="card-header">{{ $task->record->name }}</h2>
                     <form action="{{ action('TaskController@store', $task->id) }}" method="POST" class="form-horizontal">
                         {{ csrf_field() }}
                         <div class="row">
@@ -16,24 +16,67 @@
                                 <div>
                                     <div class="card-block">
                                         <br>
-                                        <input class="form-control" type="text" name="name" placeholder="Type here..."><br>
-                                        <button type="submit" class="btn btn-success">Add Task</button>
-                                        <hr>
+
                                         <label>Description</label>
-                                        <p class="form-control">{{ $task->description }}</p>
+                                        @if($task->description !== NULL)
+                                            <input class="form-control" type="text" value="{{ $task->description }}" name="description">
+                                        @else
+                                            <input class="form-control" type="text" value="There's no description for this task" name="description">
+                                        @endif
+
                                         <label>Status</label>
-                                        <p class="form-control">{{ $task->status }}</p>
+                                        @if($task->status !== NULL)
+                                            <input class="form-control" type="text" value="{{ $task->status }}" name="status">
+                                        @else
+                                            <input class="form-control" type="text" value="There's no status for this task" name="status">
+                                        @endif
+
                                         <label>Duration</label>
-                                        <p class="form-control">{{ $task->duration }} minutes</p>
-                                        <a class="btn btn-info" href="{{ action('TaskController@edit', $task->id) }}">Edit</a>
-                                        <button data-toggle="modal" data-target="#deleteModal" class="btn btn-danger">Delete</button>
+                                        @if($task->duration !== NULL)
+                                            <input class="form-control" type="text" value="{{ $task->duration }} minutes" name="duration">
+                                        @else
+                                            <input class="form-control" type="text" value="There's no duration for this task" name="duration">
+                                        @endif                                        
+
+                                        <br>
+                                        @if($task->description !== NULL)
+                                            <a class="btn btn-info" href="{{ action('TaskController@edit', $task->id) }}">Edit</a>
+                                        @endif
+                                        <br>
+                                        <button data-toggle="modal" data-target="#deleteModal" class="btn btn-danger col-sm-6">Delete</button><hr>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </form>     
+                    </form>
 
-                    <a href="{{ url('lists') }}" class="btn btn-warning">Return</a>
+                    <button data-toggle="modal" data-target="#addModal" class="btn btn-success col-sm-6">Add Task</button><br>
+
+                    <a href="{{ url('lists') }}" class="btn btn-warning col-sm-6">Return</a>
+
+                    <div id="addModal" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-footer">
+                                    <form action="{{ action('TaskController@store') }}" method="POST">
+                                        {{ csrf_field() }}
+                                        <input style="display: none" value="{{ $task->record_id }}" name="record_id">
+                                        <label>Description</label>
+                                        <input class="form-control" type="text" name="description">
+
+                                        <label>Status</label>
+                                        <input class="form-control" type="text" name="status">
+
+                                        <label>Duration</label>
+                                        <input class="form-control" type="text" name="duration">
+
+                                        <br>
+                                        <button type="submit" class="btn btn-success">Add Task</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <div id="deleteModal" class="modal fade" role="dialog">
                         <div class="modal-dialog">
@@ -51,16 +94,17 @@
     I don't have any records!
 @endif
 
-<!--                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-                </div> -->
             </div>
         </div>
     </div>
 </div>
 
+@endsection
+
+@section('scripts')
+<script>
+    .$(document).ready(function() {
+        
+    });
+</script>
 @endsection

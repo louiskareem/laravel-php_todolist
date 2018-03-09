@@ -22,19 +22,26 @@ class TaskController extends Controller
     }
 
     public function store(Request $request)
-    {
-        // $task = new Task;
-        // $task->name = $request->name;
-        if ($request->id === $record->task_id) {
-            $task->name = $request->name;
-        }else{
-            $task = new Task;
-            $task->name = $request->name;
-            $task->record_id;
-        }
+    {   
+        // dd($request->all());
+        $task = new Task;
+        $task->description = $request->description;
+        $task->duration = $request->duration;
+        $task->status = $request->status;
+        $task->record_id = $request->record_id;
+
+        // $record = Task::findOrFail($id);
+        // $task->record_id = $record->record_id;
+        // if ($task->record_id !== NULL) {
+        //     if ($task->record_id === $record = Record::where('id', $task->record_id)->first()) {
+        //         $task->record_id = $record->id;
+        //     }
+        // }else{
+        //     $task->record_id = $record->id;
+        // }
         $task->save();
 
-        return redirect('tasks/{id}');
+        return redirect('lists');
     }
 
     public function edit($id)

@@ -20,6 +20,7 @@ Auth::routes();
 // Lists
 Route::get('lists', 'RecordController@index');
 Route::post('lists', 'RecordController@store');
+Route::post('lists/results', 'RecordController@search');
 
 Route::get('lists/{id}/edit', 'RecordController@edit');
 Route::post('lists/{id}/update', 'RecordController@update');
