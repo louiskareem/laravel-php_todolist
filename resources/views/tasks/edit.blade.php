@@ -14,11 +14,11 @@
                                 <div class="card">
                                     <div class="card-block">
                                         <label>Description</label>
-                                    	<input class="form-control" type="text" name="description" placeholder="{{ $task->description }}">
+                                    	<input class="form-control" type="text" name="description" value="{{ $task->description }}">
                                         <label>Status</label>
-                                        <input class="form-control" type="text" name="status" placeholder="{{ $task->status }}">
+                                        <input class="form-control" type="text" name="status" value="{{ $task->status }}">
                                         <label>Duration</label>
-                                        <input class="form-control" type="text" name="duration" placeholder="{{ $task->duration }} minutes">
+                                        <input class="form-control" type="text" name="duration" value="{{ $task->duration }}">
                                         <button type="submit" class="btn btn-success">Submit</button>
                                     </div>
                                 </div>

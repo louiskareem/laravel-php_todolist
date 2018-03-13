@@ -9,6 +9,11 @@ use App\Task;
 
 class RecordController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
     	$records = Record::all();

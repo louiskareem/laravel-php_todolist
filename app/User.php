@@ -7,6 +7,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
+    public function record(){
+        return $this->belongsTo(Record::class);
+    }
+
     use Notifiable;
 
     /**

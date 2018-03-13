@@ -19,31 +19,31 @@
 
                                         <label>Description</label>
                                         @if($task->description !== NULL)
-                                            <input class="form-control" type="text" value="{{ $task->description }}" name="description">
+                                            <input class="form-control" type="text" placeholder="{{ $task->description }}" name="description">
                                         @else
-                                            <input class="form-control" type="text" value="There's no description for this task" name="description">
+                                            <input class="form-control" type="text" placeholder="There's no description for this task" name="description">
                                         @endif
 
                                         <label>Status</label>
                                         @if($task->status !== NULL)
-                                            <input class="form-control" type="text" value="{{ $task->status }}" name="status">
+                                            <input class="form-control" type="text" placeholder="{{ $task->status }}" name="status">
                                         @else
-                                            <input class="form-control" type="text" value="There's no status for this task" name="status">
+                                            <input class="form-control" type="text" placeholder="There's no status for this task" name="status">
                                         @endif
 
                                         <label>Duration</label>
                                         @if($task->duration !== NULL)
-                                            <input class="form-control" type="text" value="{{ $task->duration }} minutes" name="duration">
+                                            <input class="form-control" type="text" placeholder="{{ $task->duration }} minutes" name="duration">
                                         @else
-                                            <input class="form-control" type="text" value="There's no duration for this task" name="duration">
+                                            <input class="form-control" type="text" placeholder="There's no duration for this task" name="duration">
                                         @endif                                        
 
                                         <br>
                                         @if($task->description !== NULL)
-                                            <a class="btn btn-info" href="{{ action('TaskController@edit', $task->id) }}">Edit</a>
+                                            <a class="btn btn-info" href="{{ action('TaskController@edit', $task->id) }}">Edit task</a>
                                         @endif
                                         <br>
-                                        <button data-toggle="modal" data-target="#deleteModal" class="btn btn-danger col-sm-6">Delete</button><hr>
+                                        <button data-toggle="modal" data-target="#deleteModal" class="btn btn-danger">Delete</button><hr>
                                     </div>
                                 </div>
                             </div>

@@ -9,6 +9,11 @@ use App\Record;
 
 class TaskController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index($id)
     {
         $task = Task::findOrFail($id);
@@ -53,19 +58,21 @@ class TaskController extends Controller
 
     public function update(Request $request, $id)
     {
-        // $task = Task::findOrFail($id);
-        // $task->name = $request->name;
-        // $task->save();
+        $task = Task::findOrFail($id);
+        $task->description = $request->description;
+        $task->duration = $request->duration;
+        $task->status = $request->status;
+        $task->save();
 
-        // return redirect('tasks/index');
+        return redirect('lists');
     }
 
     public function delete(Request $request, $id)
     {
-        // $task = Task::findOrFail($id);
-        // $task->delete();
+        $task = Task::findOrFail($id);
+        $task->delete();
 
-        // return redirect('tasks/index');
+        return redirect('lists');
     }
 
     public function show($id)
